@@ -1,1 +1,29 @@
 package main
+
+import "github.com/hashicorp/nomad/api"
+
+type NomadApi struct {
+	config      Config
+	nomadClient *api.Client
+}
+
+func NewNomadApi(config Config) (NomadApi, error) {
+	nomadApi := NomadApi{config: config}
+	nomadConfig := &api.Config{
+		Address:   config.Host,
+		Region:    config.Region,
+		Namespace: config.Namespace,
+		SecretID:  config.Token,
+	}
+
+	var err error
+	nomadApi.nomadClient, err = api.NewClient(nomadConfig)
+	if err != nil {
+		return nomadApi, err
+	}
+	return nomadApi, nil
+}
+
+func (nomadApi NomadApi) fetchJobs() *api.Jobs {
+	return nomadApi.nomadClient.Jobs()
+}

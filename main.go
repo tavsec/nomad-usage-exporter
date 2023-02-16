@@ -49,7 +49,7 @@ func displayVersions(jobId string) {
 		log = log.WithField("version", *version.Version)
 		log.Println("Fetching resource usage for all tasks in all task groups")
 		for _, taskGroup := range version.TaskGroups {
-			log = log.WithField("taskGroup", taskGroup.Name)
+			log = log.WithField("taskGroup", *taskGroup.Name)
 			for _, task := range taskGroup.Tasks {
 				log = log.WithField("task", task.Name)
 				resourceUsage := ResourceUsage{

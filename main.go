@@ -34,9 +34,6 @@ func main() {
 		go displayVersions(job.ID)
 	}
 	wg.Wait()
-
-	log.Println(resourceUsages)
-
 }
 
 func displayVersions(jobId string) {

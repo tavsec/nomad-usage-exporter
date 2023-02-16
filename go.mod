@@ -14,5 +14,7 @@ require (
 	github.com/hashicorp/nomad/api v0.0.0-20230215190631-68abcb80a0c7 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
+	github.com/sirupsen/logrus v1.9.0 // indirect
 	golang.org/x/exp v0.0.0-20230108222341-4b8118a2686a // indirect
+	golang.org/x/sys v0.1.0 // indirect
 )

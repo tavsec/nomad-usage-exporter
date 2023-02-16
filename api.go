@@ -27,3 +27,13 @@ func NewNomadApi(config Config) (NomadApi, error) {
 func (nomadApi NomadApi) fetchJobs() *api.Jobs {
 	return nomadApi.nomadClient.Jobs()
 }
+
+func (nomadApi NomadApi) fetchDeployments(jobId string, all bool) ([]*api.Deployment, error) {
+	deployments, _, err := nomadApi.nomadClient.Jobs().Deployments(jobId, all, nil)
+	return deployments, err
+}
+
+func (nomadApi NomadApi) fetchJobVersions(jobId string, diffs bool) ([]*api.Job, error) {
+	versions, _, _, err := nomadApi.nomadClient.Jobs().Versions(jobId, diffs, nil)
+	return versions, err
+}

@@ -55,6 +55,7 @@ func displayVersions(jobId string) {
 			for _, task := range taskGroup.Tasks {
 				log = log.WithField("task", task.Name)
 				resourceUsage := ResourceUsage{
+					ID:                fmt.Sprintf("%s-%d", jobId, *version.Version),
 					TaskName:          task.Name,
 					JobId:             jobId,
 					CPUPerInstance:    *task.Resources.CPU,

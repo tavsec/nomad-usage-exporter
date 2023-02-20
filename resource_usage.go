@@ -1,6 +1,7 @@
 package main
 
 type ResourceUsage struct {
+	ID                string
 	TaskName          string
 	JobId             string
 	VersionId         uint64

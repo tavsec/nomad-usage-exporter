@@ -63,7 +63,7 @@ func displayVersions(jobId string) {
 					CPUTotal:          *taskGroup.Count * *task.Resources.CPU,
 					MemoryTotal:       *taskGroup.Count * *task.Resources.MemoryMB,
 					ChangedAt:         *version.SubmitTime,
-					VersionId:         *version.ID,
+					VersionId:         *version.Version,
 				}
 
 				err := StoreResourceUsage(resourceUsage)

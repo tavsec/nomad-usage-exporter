@@ -3,7 +3,7 @@ package main
 type ResourceUsage struct {
 	TaskName          string
 	JobId             string
-	VersionId         string
+	VersionId         uint64
 	CPUPerInstance    int
 	MemoryPerInstance int
 	NumberOfInstances int

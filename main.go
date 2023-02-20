@@ -22,6 +22,8 @@ func init() {
 	if err != nil {
 		log.Fatalln("Error creating Nomad API client: " + err.Error())
 	}
+
+	InitDynamoDb()
 }
 
 func main() {
@@ -61,6 +63,12 @@ func displayVersions(jobId string) {
 					CPUTotal:          *taskGroup.Count * *task.Resources.CPU,
 					MemoryTotal:       *taskGroup.Count * *task.Resources.MemoryMB,
 					ChangedAt:         *version.SubmitTime,
+					VersionId:         *version.ID,
+				}
+
+				err := StoreResourceUsage(resourceUsage)
+				if err != nil {
+					log.Fatalln("Error storing resource usage to DynamoDB: " + err.Error())
 				}
 
 				resourceUsages = append(resourceUsages, resourceUsage)

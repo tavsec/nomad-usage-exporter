@@ -6,7 +6,7 @@ The DynamoDB can be created using Terraform script in `./terraform` directory.
 You must have Terraform installed. Then move to `terraform` folder and run:
 ```bash
 terraform apply
-echo "DYNAMODB_TABLE_NAME=$(terraform output dynamodb_table_name)" >> ../.env
+echo "DYNAMODB_TABLE_NAME=$(terraform output dynamodb_table_name)" > ../.env
 ```
 
 It will prefill the .env file with generated DynamoDB name.

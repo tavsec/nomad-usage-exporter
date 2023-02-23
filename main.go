@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
 	log "github.com/sirupsen/logrus"
 	"sync"
@@ -24,6 +25,11 @@ func init() {
 	}
 
 	InitDynamoDb()
+
+	err = godotenv.Load()
+	if err != nil {
+		log.Info("Error loading .env file - fallback to ENVIRONMENT VARIABLES")
+	}
 }
 
 func main() {

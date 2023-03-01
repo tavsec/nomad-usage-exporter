@@ -37,3 +37,8 @@ func (nomadApi NomadApi) fetchJobVersions(jobId string, diffs bool) ([]*api.Job,
 	versions, _, _, err := nomadApi.nomadClient.Jobs().Versions(jobId, diffs, nil)
 	return versions, err
 }
+
+func (nomadApi NomadApi) fetchJobAllocations(jobId string, all bool) ([]*api.AllocationListStub, error) {
+	allocations, _, err := nomadApi.nomadClient.Jobs().Allocations(jobId, all, nil)
+	return allocations, err
+}

@@ -52,6 +52,21 @@ func displayVersions(jobId string) {
 		return
 	}
 
+	allocations, err := nomadApi.fetchJobAllocations(jobId, false)
+	if err != nil {
+		log.Fatalln(err.Error())
+		return
+	}
+
+	taskAllocations := make([]Allocation, 0)
+	for _, allocation := range allocations {
+		taskAllocations = append(taskAllocations, Allocation{
+			ID:       allocation.ID,
+			NodeID:   allocation.NodeID,
+			NodeName: allocation.NodeName,
+		})
+	}
+
 	for _, version := range versions {
 		log.Println(fmt.Sprintf("Fetched version %d, which was deployed on %d", *version.Version, *version.SubmitTime))
 		log = log.WithField("version", *version.Version)
@@ -71,6 +86,7 @@ func displayVersions(jobId string) {
 					MemoryTotal:       *taskGroup.Count * *task.Resources.MemoryMB,
 					ChangedAt:         *version.SubmitTime,
 					VersionId:         *version.Version,
+					Allocations:       taskAllocations,
 				}
 
 				err := StoreResourceUsage(resourceUsage)

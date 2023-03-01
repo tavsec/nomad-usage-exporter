@@ -10,6 +10,12 @@ type ResourceUsage struct {
 	NumberOfInstances int
 	CPUTotal          int
 	MemoryTotal       int
-	Hostname          string
 	ChangedAt         int64
+	Allocations       []Allocation
+}
+
+type Allocation struct {
+	ID       string
+	NodeID   string
+	NodeName string
 }
